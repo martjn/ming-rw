@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --no-fehbg --bg-scale '/home/ming/Downloads/pic1.png' 
+feh --no-fehbg --bg-scale 'path/to/wallpaperImage/filename'
