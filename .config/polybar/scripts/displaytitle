@@ -1,7 +1,7 @@
 #!/bin/bash
 
 clipboarder(){
-	%{A3:echo '${1//:/\\:}' | xclip -selection clipboard:}
+	echo "%{A3:echo '${1//:/\\:}' | xclip -selection clipboard:}$1%{A}"
 }
 
 mode=$(i3var get pbtitlemode)
@@ -31,9 +31,8 @@ fi
 
 # echo "%{B#00FF00}%{F#FF00FF}string%{F-} anything%{B-}"
 
+
 # echo "$awt"
 
 # polybar-msg hook MODULENAME HOOKNUMBER
 echo "%{A1:polybar-msg hook titlehook 3:}${output//\"/}%{A}"
-
-
