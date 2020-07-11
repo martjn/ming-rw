@@ -31,7 +31,6 @@ fi
 
 # echo "%{B#00FF00}%{F#FF00FF}string%{F-} anything%{B-}"
 
-
 # echo "$awt"
 
 # polybar-msg hook MODULENAME HOOKNUMBER
