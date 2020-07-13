@@ -18,10 +18,10 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #222
+background = ${xrdb:mistyle.bg1:#222}
 background-alt = #444
 ;foreground = ${xrdb:color7:#222}
-foreground = #dfdfdf
+foreground = ${xrdb:mistyle.fg1:#222}
 foreground-alt = #555
 primary = #ffb52a
 secondary = #e60053
@@ -39,25 +39,25 @@ fixed-center = false
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 3
+line-size = 1
 line-color = #f00
 
 border-size = 0 
 border-color = #00000000
 
-padding-left = 0
+padding-left = 1
 padding-right = 2
 
 module-margin-left = 0
-module-margin-right = 4
+module-margin-right = 3
 
-font-0 = fixed:pixelsize=10;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-0 = Roboto:style=Light:size=9:antialias=false;2
+font-1 = unifont:fontformat=truetype:size=5:antialias=true;0
 font-2 = siji:pixelsize=10;1
 
-modules-left = i3
-modules-center = titlescript xwindow
-modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-left = i3 xwindow
+modules-center = 
+modules-right = xbacklight alsa pulseaudio memory cpu temperature battery date 
 
 tray-position = right
 tray-padding = 2
@@ -66,7 +66,7 @@ tray-padding = 2
 ;wm-restack = bspwm
 ;wm-restack = i3
 
-override-redirect = true
+;override-redirect = true
 enable-ipc = true
 
 ;scroll-up = bspwm-desknext
@@ -86,10 +86,18 @@ label = %title:0:30:...%
 type = custom/script
 tail = true
 label = %output%
-interval = 3
+interval = 1 
 exec = displaytitle
 ;exec = i3get -r t
 
+[module/titlehook]
+type = custom/ipc
+hook-0 = displaytitle
+hook-1 = displaytitle
+hook-2 = displaytitle switch
+initial = 1
+;click-left = polybar-msg hook titlehook 1
+;click-right = polybar-msg hook titlehook 2
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -149,7 +157,7 @@ wrapping-scroll = false
 ;pin-workspaces = true
 
 label-mode-padding = 2
-label-mode-foreground = #000
+label-mode-foreground = #911
 label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
@@ -194,15 +202,15 @@ label-urgent-padding = 2
 type = internal/xbacklight
 
 format = <label> <bar>
-label = BL
+label = 
 
-bar-width = 10
+bar-width = 8
 bar-indicator = |
 bar-indicator-foreground = #fff
 bar-indicator-font = 2
 bar-fill = ─
 bar-fill-font = 2
-bar-fill-foreground = #9f78e1
+bar-fill-foreground = #FFFFFF
 bar-empty = ─
 bar-empty-font = 2
 bar-empty-foreground = ${colors.foreground-alt}
@@ -214,19 +222,19 @@ card = intel_backlight
 
 [module/cpu]
 type = internal/cpu
-interval = 2
+interval = 1
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #f90000
-label = %percentage:2%%
+format-underline = 
+label = cpu: %percentage:2%%
 
 [module/memory]
 type = internal/memory
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #4bffdc
-label = %percentage_used%%
+format-underline = 
+label = ram: %percentage_used%%
 
 [module/wlan]
 type = internal/network
@@ -278,7 +286,7 @@ time-alt = %H:%M:%S
 
 format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
+format-underline = 
 
 label = %date% %time%
 
@@ -312,22 +320,21 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 [module/alsa]
 type = internal/alsa
 
-format-volume = <label-volume> <bar-volume>
-label-volume = VOL
+format-volume = <bar-volume>
 label-volume-foreground = ${root.foreground}
 
 format-muted-prefix = " "
 format-muted-foreground = ${colors.foreground-alt}
-label-muted = sound muted
+label-muted = mute
 
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
+bar-volume-width = 8
+bar-volume-foreground-0 = #FFFFFF
+bar-volume-foreground-1 = #FFFFFF
+bar-volume-foreground-2 = #FFFFFF
+bar-volume-foreground-3 = #FFFFFF
+bar-volume-foreground-4 = #FFFFFF
+bar-volume-foreground-5 = #FFFFFF
+bar-volume-foreground-6 = #FFFFFF
 bar-volume-gradient = false
 bar-volume-indicator = |
 bar-volume-indicator-font = 2
@@ -341,17 +348,17 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 type = internal/battery
 battery = BAT0
 adapter = AC0
-full-at = 98
+full-at = 100
 
-format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffb52a
+format-charging = ac: <animation-charging> <label-charging>
+format-charging-underline = 
 
-format-discharging = <animation-discharging> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
+format-discharging = bat: <animation-discharging> <label-discharging>
+format-discharging-underline = 
 
 format-full-prefix = " "
 format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = ${self.format-charging-underline}
+format-full-underline = 
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
@@ -376,9 +383,9 @@ thermal-zone = 0
 warn-temperature = 60
 
 format = <ramp> <label>
-format-underline = #f50a4d
+format-underline = 
 format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
+format-warn-underline = 
 
 label = %temperature-c%
 label-warn = %temperature-c%
