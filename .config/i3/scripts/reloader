@@ -1,0 +1,4 @@
+#!/bin/bash
+
+xrdb -merge -I$HOME ~/.Xresources
+i3-msg restart
