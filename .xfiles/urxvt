@@ -1,0 +1,13 @@
+URxvt*font:	xft:Hack-Regular:size=9:antialias=false
+
+URxvt*cursorBlink:	0
+URxvt*scrollBar:	false
+URxvt*internalBorder:	10
+
+URxvt*underlineColor:		ylw
+URxvt*highlightTextColor:	blk
+
+urxvt*depth:		32
+urxvt*background:	rgba:0000/0000/0200/c800
+
+urxvt*saveLines:	16383
