@@ -8,31 +8,20 @@
 ;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
 ;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
 ;
-;
-;   To learn more about how to configure Polybar
-;   go to https://github.com/polybar/polybar
-;
-;   The README contains a lot of information
-;
 ;==========================================================
 
 [colors]
-;background = ${xrdb:color0:#222}
-background = ${xrdb:mistyle.bg1:#222}
+background = #00000000
 background-alt = #444
-;foreground = ${xrdb:color7:#222}
-foreground = ${xrdb:mistyle.fg1:#222}
+foreground = #E1E1E1
 foreground-alt = #555
-primary = #ffb52a
+primary = ${xrdb:mistyle.fg1:#222}
 secondary = #e60053
 alert = #bd2c40
 
 [bar/example]
-;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
 height = 16
-;offset-x = 1%
-;offset-y = 1%
 radius = 0.0
 fixed-center = false
 
@@ -53,7 +42,9 @@ module-margin-right = 3
 
 font-0 = Roboto:style=Light:size=9:antialias=false;2
 font-1 = unifont:fontformat=truetype:size=5:antialias=true;0
-font-2 = siji:pixelsize=10;1
+font-2 = Icons:style=Regular:size=12:antialias=true;3
+font-3 = cpucustom1:style=Regular:size=12:antialias=true;3
+font-4 = cpucustom2:style=Regular:size=12:antialias=true;3
 
 modules-left = i3 xwindow
 modules-center = 
@@ -80,7 +71,7 @@ cursor-scroll = ns-resize
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:30:...%
+label = %title:0:60:...%
 
 [module/titlescript]
 type = custom/script
@@ -125,31 +116,9 @@ label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
-[module/bspwm]
-type = internal/bspwm
-
-label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 2
-
-label-occupied = %index%
-label-occupied-padding = 2
-
-label-urgent = %index%!
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
-
-label-empty = %index%
-label-empty-foreground = ${colors.foreground-alt}
-label-empty-padding = 2
-
-; Separator in between workspaces
-; label-separator = |
-
 [module/i3]
 type = internal/i3
-format = <label-state> <label-mode>
+format = <label-state> <label-mode>  
 index-sort = true
 wrapping-scroll = false
 
@@ -162,7 +131,7 @@ label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
 label-focused = %index%
-label-focused-background = ${colors.background-alt}
+label-focused-background = #141414
 label-focused-underline= ${colors.primary}
 label-focused-padding = 2
 
@@ -201,19 +170,19 @@ label-urgent-padding = 2
 [module/xbacklight]
 type = internal/xbacklight
 
-format = <label> <bar>
-label = 
+format = <label>  <bar>
+label = 
 
 bar-width = 8
 bar-indicator = |
-bar-indicator-foreground = #fff
+bar-indicator-foreground = #E1E1E1
 bar-indicator-font = 2
 bar-fill = ─
 bar-fill-font = 2
-bar-fill-foreground = #FFFFFF
+bar-fill-foreground = #E1E1E1
 bar-empty = ─
 bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
+bar-empty-foreground = #E1E1E1
 
 [module/backlight-acpi]
 inherit = module/xbacklight
@@ -226,15 +195,15 @@ interval = 1
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = 
-label = cpu: %percentage:2%%
+label =  %percentage:2%%
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = "  "
+format-prefix-foreground = #E1E1E1
 format-underline = 
-label = ram: %percentage_used%%
+label = %percentage_used%%
 
 [module/wlan]
 type = internal/network
@@ -284,8 +253,8 @@ date-alt = " %Y-%m-%d"
 time = %H:%M
 time-alt = %H:%M:%S
 
-format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = 
+format-prefix-foreground = #E1E1E1
 format-underline = 
 
 label = %date% %time%
@@ -320,12 +289,12 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 [module/alsa]
 type = internal/alsa
 
-format-volume = <bar-volume>
-label-volume-foreground = ${root.foreground}
+format-volume =   <bar-volume>
+label-volume-foreground = #E1E1E1
 
-format-muted-prefix = " "
-format-muted-foreground = ${colors.foreground-alt}
-label-muted = mute
+format-muted-prefix = " "
+format-muted-foreground = #E1E1E1
+label-muted = 
 
 bar-volume-width = 8
 bar-volume-foreground-0 = #FFFFFF
@@ -350,26 +319,27 @@ battery = BAT0
 adapter = AC0
 full-at = 100
 
-format-charging = ac: <animation-charging> <label-charging>
+;format-charging = <animation-charging> <label-charging>
+format-charging =   <label-charging>
 format-charging-underline = 
 
-format-discharging = bat: <animation-discharging> <label-discharging>
+format-discharging = <ramp-capacity>  <label-discharging>
 format-discharging-underline = 
 
-format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
+format-full-prefix = "  "
+format-full-prefix-foreground = #E1E1E1
 format-full-underline = 
 
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-foreground = ${colors.foreground-alt}
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-foreground = #E1E1E1
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground-alt}
-animation-charging-framerate = 750
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-foreground = #E1E1E1
+animation-charging-framerate = 2000
 
 animation-discharging-0 = 
 animation-discharging-1 = 
@@ -382,9 +352,9 @@ type = internal/temperature
 thermal-zone = 0
 warn-temperature = 60
 
-format = <ramp> <label>
+format =   <ramp> <label>
 format-underline = 
-format-warn = <ramp> <label-warn>
+format-warn =    <ramp> <label-warn>
 format-warn-underline = 
 
 label = %temperature-c%
