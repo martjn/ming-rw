@@ -2,6 +2,7 @@
 *.background:	bg
 *.cursorColor:	fg
 *.cursorColor2:	bg
+*.border:		bg
 
 *.color0:        blk
 *.color1:        red
